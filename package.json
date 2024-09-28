@@ -1,0 +1,5 @@
+{
+  "name": "mytodo-api",
+  "module": "index.ts",
+  "type": "module"
+}
