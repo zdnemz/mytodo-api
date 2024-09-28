@@ -1,0 +1,19 @@
+{
+  "Express Request Handler": {
+    "prefix": "handler",
+    "body": [
+      "import type { Request, Response, NextFunction } from 'express';",
+      "",
+      "function ${1:$TM_FILENAME_BASE}(req: Request, res: Response, next: NextFunction) {",
+      "  try {",
+      "    // code here",
+      "  } catch (err) {",
+      "    next(err as Error);",
+      "  }",
+      "}",
+      "",
+      "export default ${1:$TM_FILENAME_BASE};",
+    ],
+    "description": "Express handler function with error handling",
+  },
+}

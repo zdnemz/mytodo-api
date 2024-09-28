@@ -1,5 +1,39 @@
 {
+  "scripts": {
+    "start": "bun ./src/index",
+    "dev": "bun --watch ./src/index",
+    "prepare": "husky",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier . --check",
+    "format:fix": "prettier . --write"
+  },
+  "dependencies": {
+    "bun": "^1.1.29",
+    "cors": "^2.8.5",
+    "express": "^4.21.0",
+    "mongoose": "^8.7.0",
+    "winston": "^3.14.2",
+    "zod": "^3.23.8"
+  },
   "name": "mytodo-api",
   "module": "index.ts",
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "@eslint/js": "^9.11.1",
+    "@types/bun": "latest",
+    "@types/eslint-config-prettier": "^6.11.3",
+    "@types/express": "^5.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.7.0",
+    "@typescript-eslint/parser": "^8.7.0",
+    "eslint": "^9.11.1",
+    "eslint-config-prettier": "^9.1.0",
+    "globals": "^15.9.0",
+    "husky": "^9.1.6",
+    "prettier": "3.3.3",
+    "typescript-eslint": "^8.7.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
 }

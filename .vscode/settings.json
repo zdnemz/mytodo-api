@@ -1,0 +1,8 @@
+{
+  "workbench.editor.customLabels.patterns": {
+    "**/models/**/*.{tsx,ts,js}": "${filename} - Model",
+    "**/utils/**/*.{tsx,ts,js}": "${filename} - Utility",
+    "**/libs/**/*.{tsx,ts,js}": "${filename} - Library",
+    "**/controllers/**/*.{tsx,ts,js}": "${filename} - Controller"
+  }
+}
