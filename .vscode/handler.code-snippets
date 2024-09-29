@@ -5,7 +5,7 @@
       "import type { Request, Response, NextFunction } from 'express';",
       "import response from '@utils/response';",
       "",
-      "function ${1:$TM_FILENAME_BASE}(req: Request, res: Response, next: NextFunction) {",
+      "async function ${1:$TM_FILENAME_BASE}(req: Request, res: Response, next: NextFunction) {",
       "  try {",
       "    return response(res, { code: ${2:200}, message: '${3:Success}', data: ${4:null} });",
       "  } catch (err) {",

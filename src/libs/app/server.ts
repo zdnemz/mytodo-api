@@ -3,22 +3,33 @@ import cors from 'cors';
 import helmet from 'helmet';
 import limiter from '@utils/limiter';
 import router from '@/routes';
-import response from '@utils/response';
 import error from '@/middlewares/error';
+import morgan from 'morgan';
+import { stream } from '@utils/logger';
+import environment from './environment';
 
 const server = express();
 
 server.use(helmet());
-server.use(cors());
+server.use(
+  cors({
+    origin: environment.CORS_ORIGIN,
+    credentials: true,
+    methods: ['GET', 'POST', 'PATCH', 'DELETE', 'PUT'],
+  })
+);
 server.use(express.json());
 server.use(limiter);
+server.use(
+  morgan(':method :url :status :res[content-length] - :response-time ms', {
+    stream,
+  })
+);
 
+// api endpoint
 server.use('/api', router);
 
-server.use('*', function (_req, res) {
-  response(res, { code: 404 });
-});
-
+// server error handler
 server.use(error);
 
 export default server;
