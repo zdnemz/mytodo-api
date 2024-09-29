@@ -2,7 +2,6 @@
   "scripts": {
     "start": "bun ./src/index",
     "dev": "bun --watch ./src/index",
-    "prepare": "husky",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier . --check",
