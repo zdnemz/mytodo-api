@@ -1,0 +1,42 @@
+openapi: 3.0.0
+info:
+  title: Health Check API
+  version: 1.0.0
+  description: API for checking the health status of the application.
+servers:
+  - url: localhost:3000
+    description: Base URL for the API
+
+paths:
+  /api/health:
+    get:
+      summary: Health Check
+      description: Returns the health status of the application.
+      operationId: getHealth
+      responses:
+        '200':
+          description: Successful health check response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: health ok!
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 500
+                  message:
+                    type: string
+                    example: Internal server error
