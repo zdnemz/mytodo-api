@@ -3,8 +3,13 @@ import environment from '@app/environment';
 import { logger } from '@utils/logger';
 import { database } from '@app/database';
 
-await database;
+try {
+  await database;
 
-server.listen(environment.PORT, () => {
-  logger.info(`server running on port ${environment.PORT}`);
-});
+  server.listen(environment.PORT, () => {
+    logger.info(`Server running: successfully on port ${environment.PORT}`);
+  });
+} catch (err) {
+  logger.error((err as Error).message);
+  process.exit(1);
+}

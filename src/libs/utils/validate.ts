@@ -1,7 +1,7 @@
 import { ZodError, ZodSchema } from 'zod';
 import { ValidationError } from './error';
 
-function validate<T>(data: T, schema: ZodSchema<T>): T {
+function validate<T>(data: unknown, schema: ZodSchema<T>): T {
   try {
     return schema.parse(data);
   } catch (err) {

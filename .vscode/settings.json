@@ -1,11 +1,12 @@
 {
   "workbench.editor.customLabels.patterns": {
-    "**/models/**/*.{tsx,ts,js}": "${filename} - Model",
-    "**/utils/**/*.{tsx,ts,js}": "${filename} - Utility",
-    "**/app/**/*.{tsx,ts,js}": "${filename} - Application",
-    "**/libs/**/*.{tsx,ts,js}": "${filename} - Library",
-    "**/controllers/**/*.{tsx,ts,js}": "${filename} - Controller",
-    "**/middlewares/**/*.{tsx,ts,js}": "${filename} - Middleware",
-    "**/routes/**/*.{tsx,ts,js}": "${filename} - Routes"
+    "**/src/models/**/*.{ts,js}": "${filename} - Model",
+    "**/src/libs/utils/**/*.{ts,js}": "${filename} - Utility",
+    "**/src/libs/app/**/*.{ts,js}": "${filename} - Application",
+    "**/src/controllers/**/*.{ts,js}": "${filename} - Controller",
+    "**/src/middlewares/**/*.{ts,js}": "${filename} - Middleware",
+    "**/src/routes/**/*.{ts,js}": "${filename} - Routes",
+    "**/tests/e2e/**/*.test.{ts,js}": "${filename} - End-to-end Testing",
+    "**/tests/unit/**/*.test.{ts,js}": "${filename} - Unit Testing"
   }
 }

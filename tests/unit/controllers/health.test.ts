@@ -2,19 +2,19 @@ import { describe, it, expect, mock } from 'bun:test';
 import health from '../../../src/controllers/health';
 import type { Request, Response, NextFunction } from 'express';
 
-describe('[unit test] - health - controller', () => {
-  it('should be ok', async () => {
-    const req = {} as Request;
-    const res = {
+describe('[Unit test] - health - controller', () => {
+  it('should return 200 when ok', async () => {
+    const request = {} as Request;
+    const response = {
       json: mock(),
       status: mock().mockReturnThis(),
     } as unknown as Response;
     const next: NextFunction = mock();
 
-    await health(req, res, next);
+    await health(request, response, next);
 
-    expect(res.status).toHaveBeenCalledWith(200);
-    expect(res.json).toHaveBeenCalledWith(
+    expect(response.status).toHaveBeenCalledWith(200);
+    expect(response.json).toHaveBeenCalledWith(
       expect.objectContaining({
         success: true,
         code: 200,

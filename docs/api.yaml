@@ -1,0 +1,174 @@
+openapi: 3.0.0
+info:
+  title: MyTodo API
+  description: API for managing tasks and user authentication in the MyTodo app.
+  version: 1.0.0
+servers:
+  - url: '{protocol}://{host}:{port}'
+    variables:
+      protocol:
+        enum:
+          - https
+          - http
+        default: http
+      host:
+        description: host of API server.
+        default: localhost
+      port:
+        description: port of API server.
+        default: '3000'
+
+paths:
+  /api/health:
+    get:
+      summary: Health check
+      description: Check the health of the API.
+      responses:
+        '200':
+          description: Health check successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: 'health ok!'
+
+  /api/auth/register:
+    post:
+      summary: Register a new user
+      description: Register a new user with email, username, and password.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  description: 'Username for the new user'
+                  example: 'johndoe'
+                email:
+                  type: string
+                  description: 'Email address for the new user'
+                  example: 'johndoe@example.com'
+                password:
+                  type: string
+                  description: 'Password for the new user'
+                  example: 'Password123'
+                name:
+                  type: string
+                  description: 'Full name of the new user'
+                  example: 'John Doe'
+                birthdate:
+                  type: string
+                  format: date
+                  description: 'Birthdate of the new user'
+                  example: '1990-01-01'
+                gender:
+                  type: string
+                  enum: [male, female, unknown]
+                  description: 'Gender of the new user'
+                  example: 'male'
+              required:
+                - username
+                - email
+                - password
+                - name
+                - birthdate
+                - gender
+      responses:
+        '201':
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 201
+                  message:
+                    type: string
+                    example: 'User has been created successfully.'
+        '400':
+          description: User already registered
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 400
+                  message:
+                    type: string
+                    example: 'User already registered.'
+
+  /api/auth/login:
+    post:
+      summary: User login
+      description: Log in a user with email/username and password.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                identifier:
+                  type: string
+                  description: 'Email or Username'
+                  example: 'johndoe@example.com'
+                password:
+                  type: string
+                  description: "User's password"
+                  example: 'Password123'
+              required:
+                - identifier
+                - password
+      responses:
+        '200':
+          description: Successfully logged in
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: 'Login successfully.'
+        '401':
+          description: Invalid username or password
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 401
+                  message:
+                    type: string
+                    example: 'Username or Password is incorrect.'
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: 'User not found.'

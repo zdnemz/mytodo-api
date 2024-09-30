@@ -2,7 +2,7 @@ import { describe, it, expect } from 'bun:test';
 import request from 'supertest';
 import server from '../../src/libs/app/server';
 
-describe('[integration test] - /api/health', () => {
+describe('[End-to-end test] - /api/health', () => {
   it('should be return status code 200', async () => {
     const response = await request(server).get('/api/health');
 
