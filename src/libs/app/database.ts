@@ -39,4 +39,4 @@ class Database {
   }
 }
 
-export const database = await Database.getInstance();
+export const database = Database.getInstance();

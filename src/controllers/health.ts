@@ -1,4 +1,4 @@
-import response from '@/libs/utils/response';
+import response from '@utils/response';
 import type { Request, Response, NextFunction } from 'express';
 
 async function health(_req: Request, res: Response, next: NextFunction) {

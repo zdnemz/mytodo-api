@@ -28,7 +28,9 @@ class Response {
     this.success = code >= 200 && code < 300;
     this.code = code;
     this.message = message || status[code];
-    this.data = data;
+    if (data) {
+      this.data = data;
+    }
   }
 }
 
