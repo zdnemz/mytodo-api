@@ -8,4 +8,14 @@ export interface User extends Document {
   name: string;
   birthdate: Date;
   gender: 'male' | 'female' | 'unknown';
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface Task extends Document {
+  id: string;
+  title: string;
+  description: string | null;
+  status: 'pending' | 'in_progress' | 'completed';
+  dueDate: Date | null;
 }
