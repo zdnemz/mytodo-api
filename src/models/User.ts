@@ -33,6 +33,7 @@ const userSchema = new Schema<User>(
   },
   {
     timestamps: true,
+    versionKey: false,
   }
 );
 

@@ -1,4 +1,4 @@
-import type { Document } from 'mongoose';
+import type { Document, Schema } from 'mongoose';
 
 export interface User extends Document {
   id: string;
@@ -15,6 +15,7 @@ export interface User extends Document {
 export interface Task extends Document {
   id: string;
   title: string;
+  userId: Schema.Types.ObjectId;
   description: string | null;
   status: 'pending' | 'in_progress' | 'completed';
   dueDate: Date | null;

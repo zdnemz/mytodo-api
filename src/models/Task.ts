@@ -8,6 +8,11 @@ const userSchema = new Schema<Task>(
       required: true,
       unique: true,
     },
+    userId: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: 'User',
+    },
     description: {
       type: String,
       default: null,
@@ -24,7 +29,8 @@ const userSchema = new Schema<Task>(
   },
   {
     timestamps: true,
+    versionKey: false,
   }
 );
 
-export default model('User', userSchema);
+export default model('Task', userSchema);

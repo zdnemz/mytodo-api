@@ -6,3 +6,9 @@ export class ValidationError extends Error {
     this.issues = issues || null;
   }
 }
+
+export class AuthorizedError extends Error {
+  constructor(message: string) {
+    super(message);
+  }
+}

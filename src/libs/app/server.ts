@@ -7,6 +7,7 @@ import error from '@/middlewares/error';
 import morgan from 'morgan';
 import { stream } from '@utils/logger';
 import environment from './environment';
+import cookieParser from 'cookie-parser';
 
 const server = express();
 
@@ -25,6 +26,7 @@ server.use(
     stream,
   })
 );
+server.use(cookieParser());
 
 // api endpoint
 server.use('/api', router);
