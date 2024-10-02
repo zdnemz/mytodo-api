@@ -4,7 +4,7 @@ import { logger } from '@utils/logger';
 import { database } from '@app/database';
 
 try {
-  await database;
+  await database.connect();
 
   server.listen(environment.PORT, () => {
     logger.info(`Server running: successfully on port ${environment.PORT}`);

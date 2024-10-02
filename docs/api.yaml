@@ -172,3 +172,208 @@ paths:
                   message:
                     type: string
                     example: 'User not found.'
+
+  /api/tasks/create:
+    post:
+      summary: create a new task
+      description: create a new task with valid user.
+      security:
+        - accessToken: []
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  description: 'Username for the new user'
+                  example: 'johndoe'
+                email:
+                  type: string
+                  description: 'Email address for the new user'
+                  example: 'johndoe@example.com'
+                password:
+                  type: string
+                  description: 'Password for the new user'
+                  example: 'Password123'
+                name:
+                  type: string
+                  description: 'Full name of the new user'
+                  example: 'John Doe'
+                birthdate:
+                  type: string
+                  format: date
+                  description: 'Birthdate of the new user'
+                  example: '1990-01-01'
+                gender:
+                  type: string
+                  enum: [male, female, unknown]
+                  description: 'Gender of the new user'
+                  example: 'male'
+              required:
+                - username
+                - email
+                - password
+                - name
+                - birthdate
+                - gender
+      responses:
+        '201':
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 201
+                  message:
+                    type: string
+                    example: 'User has been created successfully.'
+        '400':
+          description: User already registered
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 400
+                  message:
+                    type: string
+                    example: 'User already registered.'
+
+  /api/tasks:
+    get:
+      summary: Retrieve all tasks
+      description: Retrieve all tasks associated with the authenticated user.
+      security:
+        - accessToken: [] # Requires accessToken for authentication
+      responses:
+        '200':
+          description: Tasks retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: 'Tasks retrieved successfully.'
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: string
+                          example: '66fd11097117de26aae7cedf'
+                        title:
+                          type: string
+                          example: 'Test Task'
+                        description:
+                          type: string
+                          example: 'This is a test task.'
+                        dueDate:
+                          type: string
+                          format: date-time
+                          example: '2024-10-10T00:00:00Z'
+                        status:
+                          type: string
+                          example: 'pending'
+                        userId:
+                          type: string
+                          example: '66fd11097117de26aae7ceda'
+        '404':
+          description: No tasks found for this user
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: 'No tasks found for this user.'
+
+  /api/tasks/{taskId}:
+    get:
+      summary: Get a task by ID
+      description: Retrieve a task using its unique ID.
+      security:
+        - accessToken: []
+
+      parameters:
+        - in: path
+          name: taskId
+          required: true
+          description: ID of the task to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Task retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: 'Tasks retrieved successfully.'
+                  data:
+                    type: object
+                    properties:
+                      _id:
+                        type: string
+                        example: '66fd11097117de26aae7cedf'
+                      title:
+                        type: string
+                        example: 'Test Task'
+                      description:
+                        type: string
+                        example: 'This is a test task.'
+                      dueDate:
+                        type: string
+                        format: date-time
+                        example: '2024-10-10T00:00:00Z'
+                      status:
+                        type: string
+                        example: 'pending'
+                      userId:
+                        type: string
+                        example: '66fd11097117de26aae7ceda'
+        '404':
+          description: Task not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: 'Task is not found by the id.'
+
+components:
+  securitySchemes:
+    accessToken:
+      type: apiKey
+      in: cookie
+      name: accessToken
+      description: 'Authentication token for user session.'

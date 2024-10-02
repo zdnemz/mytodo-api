@@ -3,20 +3,7 @@ import environment from './environment';
 import { logger } from '../utils/logger';
 
 class Database {
-  private static instance: Database;
-
-  private constructor() {}
-
-  public static async getInstance(): Promise<Database> {
-    if (!Database.instance) {
-      const db = new Database();
-      await db.connect();
-      Database.instance = db;
-    }
-    return Database.instance;
-  }
-
-  private async connect() {
+  public static async connect() {
     try {
       await mongoose.connect(environment.MONGO_URI, {
         dbName: environment.MONGO_DB,
@@ -28,7 +15,7 @@ class Database {
     }
   }
 
-  public async disconnect() {
+  public static async disconnect() {
     try {
       await mongoose.disconnect();
       logger.info('Database disconnected: successfully');
@@ -39,4 +26,4 @@ class Database {
   }
 }
 
-export const database = Database.getInstance();
+export const database = Database;

@@ -6,7 +6,6 @@ const userSchema = new Schema<Task>(
     title: {
       type: String,
       required: true,
-      unique: true,
     },
     userId: {
       type: Schema.Types.ObjectId,

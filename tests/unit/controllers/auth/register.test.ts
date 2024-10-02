@@ -14,7 +14,7 @@ import { ValidationError } from '../../../../src/libs/utils/error';
 import User from '../../../../src/models/User';
 import type { NextFunction, Request, Response } from 'express';
 
-describe('[Unit test] - register - controller', () => {
+describe('[Unit test] - auth/register - controller', () => {
   let mongoServer: MongoMemoryServer;
 
   beforeAll(async () => {

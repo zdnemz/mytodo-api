@@ -16,7 +16,7 @@ import { ValidationError } from '../../../../src/libs/utils/error';
 
 const mockUserId = new mongoose.Types.ObjectId();
 
-describe('[Unit test] - create - controller', () => {
+describe('[Unit test] - tasks/create - controller', () => {
   let mongoServer: MongoMemoryServer;
 
   beforeAll(async () => {

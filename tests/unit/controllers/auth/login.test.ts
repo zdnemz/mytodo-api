@@ -16,7 +16,7 @@ import { password } from 'bun';
 import type { NextFunction, Request, Response } from 'express';
 import environment from '../../../../src/libs/app/environment';
 
-describe('[Unit test] - login - controller', () => {
+describe('[Unit test] - auth/login - controller', () => {
   let mongoServer: MongoMemoryServer;
 
   beforeAll(async () => {
@@ -72,7 +72,7 @@ describe('[Unit test] - login - controller', () => {
       })
     );
     expect(response.cookie).toHaveBeenCalledWith(
-      'access_token',
+      'accessToken',
       expect.stringContaining(''),
       expect.objectContaining({
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days

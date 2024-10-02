@@ -72,7 +72,7 @@ describe('[End-to-end test] - /api/auth/login', () => {
       ? response.headers['set-cookie']
       : [response.headers['set-cookie']];
     const accessTokenCookie = cookies.find((cookie) =>
-      cookie.startsWith('access_token=')
+      cookie.startsWith('accessToken=')
     );
 
     expect(accessTokenCookie).toBeDefined();

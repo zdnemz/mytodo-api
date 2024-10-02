@@ -52,7 +52,7 @@ async function login(req: Request, res: Response, next: NextFunction) {
       email: user.email,
     } as JWTAuthPayload);
 
-    res.cookie('access_token', token, {
+    res.cookie('accessToken', token, {
       maxAge: 7 * 24 * 60 * 60 * 1000, //7 days
       secure: environment.NODE_ENV === 'production',
       httpOnly: true,
