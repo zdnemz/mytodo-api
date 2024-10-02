@@ -15,7 +15,7 @@ import User from '../../../src/models/User';
 import { password } from 'bun';
 import environment from '../../../src/libs/app/environment';
 
-describe('[End-to-end test] - /api/tasks/ (GET)', () => {
+describe('[End-to-end test] - /api/tasks/ - GET', () => {
   let mongoServer: MongoMemoryServer;
   let accessToken: string;
 
@@ -38,8 +38,8 @@ describe('[End-to-end test] - /api/tasks/ (GET)', () => {
       username: 'testuser',
       email: 'test@example.com',
       password: await password.hash('StrongPassword1', 'bcrypt'),
-      name: 'Test User', // Include the required `name` field
-      birthdate: new Date('2000-01-01'), // Include the required `birthdate` field
+      name: 'Test User',
+      birthdate: new Date('2000-01-01'),
     });
 
     const loginData = {

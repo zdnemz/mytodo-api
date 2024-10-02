@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeAll, afterAll, mock } from 'bun:test';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
-import getById from '../../../../src/controllers/tasks/getById';
+import deleteByid from '../../../../src/controllers/tasks/delete';
 import Task from '../../../../src/models/Task';
 import type { NextFunction, Request, Response } from 'express';
 
@@ -15,7 +15,7 @@ const mockTask = {
   dueDate: new Date(Date.now() + 24 * 60 * 60 * 1000), // 1 day in the future
 };
 
-describe('[Unit test] - tasks/getById - controller', () => {
+describe('[Unit test] - tasks/deleteById - controller', () => {
   let mongoServer: MongoMemoryServer;
   let mockTaskId: unknown;
 
@@ -34,7 +34,7 @@ describe('[Unit test] - tasks/getById - controller', () => {
   });
 
   // Test case: Successful task creation
-  it('should return 200 when task is retrieved successfully', async () => {
+  it('should return 200 when task is deleted successfully', async () => {
     const request = {
       params: {
         taskId: mockTaskId,
@@ -47,14 +47,13 @@ describe('[Unit test] - tasks/getById - controller', () => {
     } as unknown as Response;
     const next: NextFunction = mock();
 
-    await getById(request, response, next);
+    await deleteByid(request, response, next);
 
     expect(response.status).toHaveBeenCalledWith(200);
     expect(response.json).toHaveBeenCalledWith(
       expect.objectContaining({
         code: 200,
-        message: 'Tasks retrieved successfully.',
-        data: expect.objectContaining(mockTask),
+        message: 'Task deleted successfully.',
       })
     );
     expect(next).not.toHaveBeenCalled();
@@ -74,7 +73,7 @@ describe('[Unit test] - tasks/getById - controller', () => {
     } as unknown as Response;
     const next: NextFunction = mock();
 
-    await getById(request, response, next);
+    await deleteByid(request, response, next);
 
     expect(response.status).toHaveBeenCalledWith(400);
     expect(response.json).toHaveBeenCalledWith(
@@ -100,13 +99,13 @@ describe('[Unit test] - tasks/getById - controller', () => {
     } as unknown as Response;
     const next: NextFunction = mock();
 
-    await getById(request, response, next);
+    await deleteByid(request, response, next);
 
     expect(response.status).toHaveBeenCalledWith(404);
     expect(response.json).toHaveBeenCalledWith(
       expect.objectContaining({
         code: 404,
-        message: 'Task is not found by the id.',
+        message: 'Task not found to delete.',
       })
     );
     expect(next).not.toHaveBeenCalled();

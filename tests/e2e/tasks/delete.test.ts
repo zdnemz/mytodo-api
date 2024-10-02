@@ -15,7 +15,7 @@ import User from '../../../src/models/User';
 import { password } from 'bun';
 import environment from '../../../src/libs/app/environment';
 
-describe('[End-to-end test] - /api/tasks/:taskId - GET', () => {
+describe('[End-to-end test] - /api/tasks/:taskId - DELETE', () => {
   let mongoServer: MongoMemoryServer;
   let accessToken: string;
   let mockTaskId: string;
@@ -70,7 +70,7 @@ describe('[End-to-end test] - /api/tasks/:taskId - GET', () => {
 
   it('should return 200 and retrieve a task successfully when the task exists', async () => {
     const response = await request(server)
-      .get(`/api/tasks/${mockTaskId}`)
+      .delete(`/api/tasks/${mockTaskId}`)
       .set('Cookie', [`accessToken=${accessToken}`]);
 
     expect(response.statusCode).toEqual(200);
@@ -78,24 +78,15 @@ describe('[End-to-end test] - /api/tasks/:taskId - GET', () => {
     expect(response.body).toEqual({
       success: true,
       code: 200,
-      message: 'Tasks retrieved successfully.',
-      data: expect.objectContaining({
-        _id: mockTaskId,
-        title: 'Test Task',
-        description: 'This is a test task.',
-        status: 'pending',
-        userId: expect.any(String),
-        createdAt: expect.any(String),
-        updatedAt: expect.any(String),
-      }),
+      message: 'Task deleted successfully.',
     });
   });
 
-  it('should return 404 when task is not found by ID', async () => {
+  it('should return 404 when task not found', async () => {
     const nonExistentTaskId = new mongoose.Types.ObjectId();
 
     const response = await request(server)
-      .get(`/api/tasks/${nonExistentTaskId}`)
+      .delete(`/api/tasks/${nonExistentTaskId}`)
       .set('Cookie', [`accessToken=${accessToken}`]);
 
     expect(response.statusCode).toEqual(404);
@@ -103,12 +94,12 @@ describe('[End-to-end test] - /api/tasks/:taskId - GET', () => {
     expect(response.body).toEqual({
       success: false,
       code: 404,
-      message: 'Task is not found by the id.',
+      message: 'Task not found to delete.',
     });
   });
 
   it('should return 401 when user is not authenticated', async () => {
-    const response = await request(server).get('/api/tasks/');
+    const response = await request(server).delete(`/api/tasks/${mockTaskId}`);
 
     expect(response.statusCode).toEqual(401);
     expect(response.body).toBeDefined();

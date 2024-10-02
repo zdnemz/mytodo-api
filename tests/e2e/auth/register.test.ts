@@ -12,7 +12,7 @@ import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
 import User from '../../../src/models/User';
 
-describe('[End-to-end test] - /api/auth/register', () => {
+describe('[End-to-end test] - /api/auth/register - POST', () => {
   let mongoServer: MongoMemoryServer;
 
   beforeAll(async () => {

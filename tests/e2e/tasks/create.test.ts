@@ -15,7 +15,7 @@ import User from '../../../src/models/User';
 import { password } from 'bun';
 import environment from '../../../src/libs/app/environment';
 
-describe('[End-to-end test] - /api/tasks/create', () => {
+describe('[End-to-end test] - /api/tasks/create - POST', () => {
   let mongoServer: MongoMemoryServer;
   let accessToken: string;
 

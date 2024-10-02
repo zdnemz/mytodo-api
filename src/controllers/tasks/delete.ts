@@ -4,7 +4,7 @@ import type { JWTAuthPayload } from '@/types';
 import Task from '@/models/Task';
 import { isValidObjectId } from 'mongoose';
 
-async function getById(req: Request, res: Response, next: NextFunction) {
+async function deleteById(req: Request, res: Response, next: NextFunction) {
   try {
     const taskId = req.params.taskId;
     if (!isValidObjectId(taskId)) {
@@ -14,21 +14,21 @@ async function getById(req: Request, res: Response, next: NextFunction) {
 
     const userId = (req as Request & { user: JWTAuthPayload }).user.id;
 
-    const task = await Task.findOne({ _id: taskId, userId });
+    const task = await Task.findOneAndDelete({ _id: taskId, userId });
     if (!task) {
-      response(res, { code: 404, message: 'Task is not found by the id.' });
-      return;
+      return response(res, {
+        code: 404,
+        message: 'Task not found to delete.',
+      });
     }
 
-    response(res, {
+    return response(res, {
       code: 200,
-      message: 'Tasks retrieved successfully.',
-      data: task,
+      message: 'Task deleted successfully.',
     });
-    return;
   } catch (err) {
     next(err as Error);
   }
 }
 
-export default getById;
+export default deleteById;
