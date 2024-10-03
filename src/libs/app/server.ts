@@ -8,6 +8,7 @@ import morgan from 'morgan';
 import { stream } from '@utils/logger';
 import environment from './environment';
 import cookieParser from 'cookie-parser';
+import notFound from '@/middlewares/notFound';
 
 const server = express();
 
@@ -30,6 +31,9 @@ server.use(cookieParser());
 
 // api endpoint
 server.use('/api', router);
+
+// not found handler
+server.use(notFound);
 
 // server error handler
 server.use(error);
