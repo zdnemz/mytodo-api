@@ -2,7 +2,7 @@ export class ValidationError extends Error {
   issues: string[] | null;
 
   constructor(issues: string[] | null) {
-    super('Validation Error');
+    super('Validation error.');
     this.issues = issues || null;
   }
 }

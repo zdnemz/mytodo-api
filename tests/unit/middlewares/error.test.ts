@@ -24,7 +24,7 @@ describe('[Unit test] - error - middleware', () => {
     expect(responseMock.json).toHaveBeenCalledWith(
       expect.objectContaining({
         code: 400,
-        message: 'Validation Error',
+        message: 'Validation error.',
         data: { issues: validationError.issues },
       })
     );

@@ -135,7 +135,7 @@ describe('[Unit test] - auth/login - controller', () => {
     expect(response.json).toHaveBeenCalledWith(
       expect.objectContaining({
         code: 401,
-        message: 'Invalid credentials.',
+        message: 'Invalid credentials..',
       })
     );
     expect(next).not.toHaveBeenCalled();

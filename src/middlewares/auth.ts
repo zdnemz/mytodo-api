@@ -7,12 +7,12 @@ async function auth(req: Request, _res: Response, next: NextFunction) {
   try {
     const { accessToken } = req.cookies;
     if (!accessToken) {
-      throw new AuthorizedError('Invalid Credentials');
+      throw new AuthorizedError('Invalid credentials.');
     }
 
     const payload = jwt.verify(accessToken);
     if (!payload) {
-      throw new AuthorizedError('Invalid Credentials');
+      throw new AuthorizedError('Invalid credentials.');
     }
 
     (req as Request & { user: JWTAuthPayload }).user =

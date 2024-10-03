@@ -25,6 +25,6 @@ describe('[Unit test] - validate - utility function', () => {
     const inputData = { name: 'John Doe', age: -5 };
 
     expect(() => validate(inputData, schema)).toThrow(ValidationError);
-    expect(() => validate(inputData, schema)).toThrow('Validation Error');
+    expect(() => validate(inputData, schema)).toThrow('Validation error.');
   });
 });

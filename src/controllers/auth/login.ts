@@ -2,8 +2,8 @@ import type { Request, Response, NextFunction } from 'express';
 import response from '@utils/response';
 import validate from '@utils/validate';
 import { z } from 'zod';
+import bcrypt from 'bcrypt';
 import User from '@/models/User';
-import { password } from 'bun';
 import jwt from '@/libs/utils/jwt';
 import type { JWTAuthPayload } from '@/types';
 import environment from '@/libs/app/environment';
@@ -39,10 +39,10 @@ async function login(req: Request, res: Response, next: NextFunction) {
       return;
     }
 
-    if (!(await password.verify(validated.password, user.password, 'bcrypt'))) {
+    if (!(await bcrypt.compare(validated.password, user.password))) {
       response(res, {
         code: 401,
-        message: 'Invalid credentials.',
+        message: 'Invalid credentials..',
       });
       return;
     }

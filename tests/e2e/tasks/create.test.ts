@@ -97,7 +97,7 @@ describe('[End-to-end test] - /api/tasks/create - POST', () => {
     expect(response.body).toEqual({
       success: false,
       code: 400,
-      message: 'Validation Error',
+      message: 'Validation error.',
       data: {
         issues: [expect.stringContaining('Title is required.')],
       },
@@ -120,7 +120,7 @@ describe('[End-to-end test] - /api/tasks/create - POST', () => {
     expect(response.body).toEqual({
       success: false,
       code: 401,
-      message: 'Invalid Credentials',
+      message: 'Invalid credentials.',
     });
   });
 });

@@ -16,16 +16,18 @@ async function deleteById(req: Request, res: Response, next: NextFunction) {
 
     const task = await Task.findOneAndDelete({ _id: taskId, userId });
     if (!task) {
-      return response(res, {
+      response(res, {
         code: 404,
         message: 'Task not found to delete.',
       });
+      return;
     }
 
-    return response(res, {
+    response(res, {
       code: 200,
       message: 'Task deleted successfully.',
     });
+    return;
   } catch (err) {
     next(err as Error);
   }

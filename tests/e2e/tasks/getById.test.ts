@@ -115,7 +115,7 @@ describe('[End-to-end test] - /api/tasks/:taskId - GET', () => {
     expect(response.body).toEqual({
       success: false,
       code: 401,
-      message: 'Invalid Credentials',
+      message: 'Invalid credentials.',
     });
   });
 });

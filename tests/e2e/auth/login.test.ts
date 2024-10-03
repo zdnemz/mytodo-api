@@ -93,7 +93,7 @@ describe('[End-to-end test] - /api/auth/login - POST', () => {
     expect(response.body).toEqual({
       success: false,
       code: 401,
-      message: 'Invalid credentials.',
+      message: 'Invalid credentials..',
     });
   });
 
@@ -112,7 +112,7 @@ describe('[End-to-end test] - /api/auth/login - POST', () => {
     expect(response.body).toEqual({
       success: false,
       code: 400,
-      message: 'Validation Error',
+      message: 'Validation error.',
       data: {
         issues: [expect.stringContaining('required')],
       },

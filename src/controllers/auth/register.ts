@@ -3,7 +3,7 @@ import response from '@utils/response';
 import { z } from 'zod';
 import validate from '@utils/validate';
 import User from '@/models/User';
-import { password } from 'bun';
+import bcrypt from 'bcrypt';
 import { logger } from '@utils/logger';
 
 const schemaValidation = z.object({
@@ -49,7 +49,7 @@ async function register(req: Request, res: Response, next: NextFunction) {
       return;
     }
 
-    const hashedPassword = await password.hash(validated.password, 'bcrypt');
+    const hashedPassword = await bcrypt.hash(validated.password, 12);
     const newUser = await User.create({
       ...validated,
       password: hashedPassword,
